@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import React from "react";
+import { TaskProvider } from "./context/TaskContext";
+import Navbar from "./components/Navbar";
+import "./styles/global.css";
+import TodoTask from "./components/TodoTask";
+import OnProgressTask from "./components/OnProgressTask";
+import DoneTask from "./components/Donetask";
+import TaskList from "./components/TaskList";
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <TaskProvider>
+      <div className="min-h-screen bg-white">
+        {/* Navbar */}
+        <Navbar />
 
-export default App
+        {/* Task Sections */}
+        <section className="flex flex-col md:flex-row justify-center items-start mx-auto px-4 py-6 gap-6">
+          {/*Task List summery*/}
+          <div className="flex-1 w-full md:w-1/4">
+            <TaskList />
+          </div>
+
+          {/* To Do Task List */}
+          <div className="flex-1 w-full md:w-1/4">
+            <TodoTask />
+          </div>
+
+          {/* On Progress Task List */}
+          <div className="flex-1 w-full md:w-1/4">
+            <OnProgressTask />
+          </div>
+
+          {/* Done Task List */}
+          <div className="flex-1 w-full md:w-1/4">
+            <DoneTask />
+          </div>
+        </section>
+      </div>
+    </TaskProvider>
+  );
+};
+export default App;
