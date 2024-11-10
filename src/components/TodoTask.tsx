@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 
 const TodoTask: React.FC = () => {
-  const { tasks, editTask } = useContext(TaskContext)!;
+  const { tasks, editTask, removeTask } = useContext(TaskContext)!;
 
   const todoTasks = tasks.filter((task) => task.status === "To Do");
 
@@ -12,6 +12,9 @@ const TodoTask: React.FC = () => {
       status: value,
     };
     editTask(id, data);
+  };
+  const handleDelete = (id: string) => {
+    removeTask(id);
   };
 
   return (
@@ -54,7 +57,10 @@ const TodoTask: React.FC = () => {
                 Done
               </button>
 
-              <button className=" text-red-500 bg-red-200 px-4 rounded py-2">
+              <button
+                className=" text-red-500 bg-red-200 px-4 rounded py-2"
+                onClick={() => handleDelete(task._id as string)}
+              >
                 Delete
               </button>
             </div>

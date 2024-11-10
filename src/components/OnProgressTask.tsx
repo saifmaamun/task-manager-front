@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 
 const OnProgressTask: React.FC = () => {
-  const { tasks, editTask } = useContext(TaskContext)!;
+  const { tasks, editTask, removeTask } = useContext(TaskContext)!;
+  const onProgressTasks = tasks.filter((task) => task.status === "On Progress");
   const handleStatusChange = (id: string, value: string) => {
     console.log(id);
     const data = {
@@ -10,8 +11,9 @@ const OnProgressTask: React.FC = () => {
     };
     editTask(id, data);
   };
-
-  const onProgressTasks = tasks.filter((task) => task.status === "On Progress");
+  const handleDelete = (id: string) => {
+    removeTask(id);
+  };
 
   return (
     <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
@@ -47,7 +49,10 @@ const OnProgressTask: React.FC = () => {
                 Done
               </button>
 
-              <button className=" text-red-500 bg-red-200 px-4 rounded py-2">
+              <button
+                className=" text-red-500 bg-red-200 px-4 rounded py-2"
+                onClick={() => handleDelete(task._id as string)}
+              >
                 Delete
               </button>
             </div>
