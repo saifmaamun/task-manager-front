@@ -25,6 +25,11 @@ const TaskDone: React.FC = () => {
             <span className="text-xs text-gray-400">
               Deadline: {task.deadline}
             </span>
+            <div className="flex justify-between items-center my-4">
+              <button className=" text-red-500 bg-red-200 px-4 rounded py-2">
+                Delete
+              </button>
+            </div>
           </div>
         ))
       ) : (

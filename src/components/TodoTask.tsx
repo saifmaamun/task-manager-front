@@ -2,9 +2,17 @@ import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 
 const TodoTask: React.FC = () => {
-  const { tasks } = useContext(TaskContext)!;
+  const { tasks, editTask } = useContext(TaskContext)!;
 
   const todoTasks = tasks.filter((task) => task.status === "To Do");
+
+  const handleStatusChange = (id: string) => {
+    console.log(id);
+    const data = {
+      status: "Done",
+    };
+    editTask(id, data);
+  };
 
   return (
     <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
@@ -18,7 +26,7 @@ const TodoTask: React.FC = () => {
 
       {todoTasks.length > 0 ? (
         todoTasks.map((task) => (
-          <div key={task.id} className="mb-4 p-3 bg-white rounded-md shadow">
+          <div key={task._id} className="mb-4 p-3 bg-white rounded-md shadow">
             <p className="text-sm text-[#FFA500] bg-[#dfa87434] inline-block px-2 rounded">
               {task.priority}
             </p>
@@ -27,6 +35,24 @@ const TodoTask: React.FC = () => {
             <span className="text-xs text-gray-400">
               Deadline: {task.deadline}
             </span>
+            {/* <StatusChange />
+             */}
+
+            <div className="flex justify-between items-center my-4">
+              <button
+                className="text-[#FFA500] bg-[#dfa87434] px-4 rounded py-2"
+                onClick={() => handleStatusChange(task._id as string)}
+              >
+                On Progress
+              </button>
+              <button className=" text-[#8BC48A] bg-[#83c29d33] px-4 rounded py-2">
+                Done
+              </button>
+
+              <button className=" text-red-500 bg-red-200 px-4 rounded py-2">
+                Delete
+              </button>
+            </div>
           </div>
         ))
       ) : (

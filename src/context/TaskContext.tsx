@@ -7,7 +7,7 @@ interface TaskContextType {
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 
   createTask: (task: Task) => Promise<void>;
-  editTask: (id: string, updatedTask: Task) => Promise<void>;
+  editTask: (id: string, data: { status: string }) => Promise<void>;
   removeTask: (id: string) => Promise<void>;
 }
 
@@ -42,22 +42,16 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Edit an existing task
-  const editTask = async (id: string, updatedTask: Task) => {
-    try {
-      const updated = await updateTask(id, updatedTask);
-      setTasks((prevTasks) =>
-        prevTasks.map((task) => (task.id === id ? updated : task))
-      );
-    } catch (error) {
-      console.error("Failed to update task:", error);
-    }
+  const editTask = async (id: string, data: { status: string }) => {
+    const updated = await updateTask(id, data);
+    console.log(updated, "from context");
   };
 
   // Delete a task
   const removeTask = async (id: string) => {
     try {
       await deleteTask(id);
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error("Failed to delete task:", error);
     }
@@ -68,7 +62,6 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
       value={{
         tasks,
         setTasks,
-
         createTask,
         editTask,
         removeTask,
