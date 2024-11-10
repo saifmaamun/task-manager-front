@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Task } from "../types/task";
 
-const API_BASE_URL = "http://localhost:5000";
+// const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://back-eta-six.vercel.app";
 
 export const fetchTasks = async () => {
   const response = await axios.get(`${API_BASE_URL}/tasks`);

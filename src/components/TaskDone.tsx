@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 
-const DoneTask: React.FC = () => {
+const TaskDone: React.FC = () => {
   const { tasks } = useContext(TaskContext)!;
-
   const doneTasks = tasks.filter((task) => task.status === "Done");
 
   return (
@@ -35,4 +34,4 @@ const DoneTask: React.FC = () => {
   );
 };
 
-export default DoneTask;
+export default TaskDone;

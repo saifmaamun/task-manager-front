@@ -1,14 +1,15 @@
 import React from "react";
-import { TaskProvider } from "./context/TaskContext";
 import Navbar from "./components/Navbar";
 import "./styles/global.css";
 import TodoTask from "./components/TodoTask";
 import OnProgressTask from "./components/OnProgressTask";
-import DoneTask from "./components/Donetask";
+
 import TaskList from "./components/TaskList";
+import TaskDone from "./components/TaskDone";
+
 const App: React.FC = () => {
   return (
-    <TaskProvider>
+    <div>
       <div className="min-h-screen bg-white">
         {/* Navbar */}
         <Navbar />
@@ -32,11 +33,11 @@ const App: React.FC = () => {
 
           {/* Done Task List */}
           <div className="flex-1 w-full md:w-1/4">
-            <DoneTask />
+            <TaskDone />
           </div>
         </section>
       </div>
-    </TaskProvider>
+    </div>
   );
 };
 export default App;

@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { TaskContext } from "../context/TaskContext";
 
 const Navbar: React.FC = () => {
+  //
+  const { tasks } = useContext(TaskContext)!;
   const [searchQuery, setSearchQuery] = useState("");
 
   // Handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
+    const searchedData = tasks.filter((task) =>
+      task.title.toLowerCase().includes(searchQuery)
+    );
+    console.log(searchedData);
   };
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -34,7 +41,7 @@ const Navbar: React.FC = () => {
           placeholder="Search Project"
           value={searchQuery}
           onChange={handleSearchChange}
-          className="w-full px-4 py-1 bg-transparent  border-none  focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full px-4 py-1 bg-transparent  border-none  focus:outline-none  "
         />
       </div>
 

@@ -5,6 +5,7 @@ import { fetchTasks, addTask, updateTask, deleteTask } from "../api/tasks";
 interface TaskContextType {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+
   createTask: (task: Task) => Promise<void>;
   editTask: (id: string, updatedTask: Task) => Promise<void>;
   removeTask: (id: string) => Promise<void>;
@@ -64,7 +65,14 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <TaskContext.Provider
-      value={{ tasks, setTasks, createTask, editTask, removeTask }}
+      value={{
+        tasks,
+        setTasks,
+
+        createTask,
+        editTask,
+        removeTask,
+      }}
     >
       {children}
     </TaskContext.Provider>
