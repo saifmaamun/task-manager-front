@@ -1,7 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TaskContext } from "../context/TaskContext";
+import AddTaskDialog from "./AddTaskDialog";
 
 const TaskList: React.FC = () => {
+  // add task
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => setIsDialogOpen(true);
+  const handleCloseDialog = () => setIsDialogOpen(false);
+
   const { tasks } = useContext(TaskContext)!;
 
   // Get today's date for comparison
@@ -62,9 +69,13 @@ const TaskList: React.FC = () => {
 
       {/* Add Task Button */}
       <div className="flex justify-end">
-        <button className="bg-[#0D062D] text-white py-3 px-6 rounded-2xl w-full shadow  transition duration-300">
+        <button
+          className="bg-[#0D062D] text-white py-3 px-6 rounded-2xl w-full shadow  transition duration-300"
+          onClick={handleOpenDialog}
+        >
           + Add Task
         </button>
+        <AddTaskDialog isOpen={isDialogOpen} onClose={handleCloseDialog} />
       </div>
     </div>
   );
