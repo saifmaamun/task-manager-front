@@ -9,6 +9,7 @@ const OnProgressTask: React.FC = () => {
     const data = {
       status: value,
     };
+    console.log(data, "from op ");
     editTask(id, data);
   };
   const handleDelete = (id: string) => {
