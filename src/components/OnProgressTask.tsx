@@ -2,7 +2,14 @@ import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 
 const OnProgressTask: React.FC = () => {
-  const { tasks } = useContext(TaskContext)!;
+  const { tasks, editTask } = useContext(TaskContext)!;
+  const handleStatusChange = (id: string, value: string) => {
+    console.log(id);
+    const data = {
+      status: value,
+    };
+    editTask(id, data);
+  };
 
   const onProgressTasks = tasks.filter((task) => task.status === "On Progress");
 
@@ -27,10 +34,16 @@ const OnProgressTask: React.FC = () => {
               Deadline: {task.deadline}
             </span>
             <div className="flex justify-between items-center my-4">
-              <button className="text-[#5030E5]  bg-[#5130e517]  px-4 rounded py-2">
+              <button
+                className="text-[#5030E5]  bg-[#5130e517]  px-4 rounded py-2"
+                onClick={() => handleStatusChange(task._id as string, "To Do")}
+              >
                 To Do
               </button>
-              <button className=" text-[#8BC48A] bg-[#83c29d33] px-4 rounded py-2">
+              <button
+                className=" text-[#8BC48A] bg-[#83c29d33] px-4 rounded py-2"
+                onClick={() => handleStatusChange(task._id as string, "Done")}
+              >
                 Done
               </button>
 

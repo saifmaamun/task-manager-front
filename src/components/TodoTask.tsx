@@ -6,10 +6,10 @@ const TodoTask: React.FC = () => {
 
   const todoTasks = tasks.filter((task) => task.status === "To Do");
 
-  const handleStatusChange = (id: string) => {
+  const handleStatusChange = (id: string, value: string) => {
     console.log(id);
     const data = {
-      status: "Done",
+      status: value,
     };
     editTask(id, data);
   };
@@ -41,11 +41,16 @@ const TodoTask: React.FC = () => {
             <div className="flex justify-between items-center my-4">
               <button
                 className="text-[#FFA500] bg-[#dfa87434] px-4 rounded py-2"
-                onClick={() => handleStatusChange(task._id as string)}
+                onClick={() =>
+                  handleStatusChange(task._id as string, "On Progress")
+                }
               >
                 On Progress
               </button>
-              <button className=" text-[#8BC48A] bg-[#83c29d33] px-4 rounded py-2">
+              <button
+                className=" text-[#8BC48A] bg-[#83c29d33] px-4 rounded py-2"
+                onClick={() => handleStatusChange(task._id as string, "Done")}
+              >
                 Done
               </button>
 
